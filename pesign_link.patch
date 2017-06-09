@@ -1,0 +1,11 @@
+--- pesign-0.112/Make.defaults	2017-06-09 14:15:57.598040656 -0700
++++ pesign-0.112/Make.defaults	2017-06-09 14:18:58.482640441 -0700
+@@ -48,7 +48,7 @@ clang_ccldflags =
+ gcc_ccldflags = -fno-merge-constants \
+ 	-Wl,--fatal-warnings,--no-allow-shlib-undefined,--default-symver \
+ 	-Wl,-O2 -Wl,--no-undefined-version -Wl,-z,relro,-z,now \
+-	--Wl,--no-add-needed,--no-copy-dt-needed-entries,--as-needed
++	-Wl,--no-add-needed,--no-copy-dt-needed-entries,--as-needed
+ ccldflags = $(cflags) $(CCLDFLAGS) $(LDFLAGS) \
+ 	$(if $(filter $(CCLD),clang),$(clang_ccldflags),) \
+ 	$(if $(filter $(CCLD),gcc),$(gcc_ccldflags),) \
