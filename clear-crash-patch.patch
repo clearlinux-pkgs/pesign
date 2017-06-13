@@ -1,0 +1,63 @@
+Fix assertion crashes on signing.
+
+pesign crashes on assertions in various places where memory is expected to be
+zero'ed (within nss).
+
+This patch is a no-brainer workaround to satisfy the requirements of the nss
+routines.
+diff -ru pesign-0.112-orig/src/cms_common.c pesign-0.112/src/cms_common.c
+--- pesign-0.112-orig/src/cms_common.c	2017-06-13 23:24:43.030253930 +0000
++++ pesign-0.112/src/cms_common.c	2017-06-13 23:27:00.776716374 +0000
+@@ -693,6 +693,7 @@
+ 	if (whenitem.len == 32)
+ 		cmsreterr(-1, cms, "could not encode timestamp");
+ 
++	encoded->data = NULL;
+ 	if (SEC_ASN1EncodeItem(cms->arena, encoded, &whenitem,
+ 			SEC_UTCTimeTemplate) == NULL)
+ 		cmsreterr(-1, cms, "could not encode timestamp");
+@@ -717,6 +718,7 @@
+ 			 .len = 0
+ 	};
+ 	void *ret;
++	encoded->data = NULL;
+ 	ret = SEC_ASN1EncodeItem(cms->arena, encoded, &empty,
+ 							EmptySequenceTemplate);
+ 	if (ret == NULL)
+@@ -756,6 +758,7 @@
+ 		cms->log(cms, LOG_ERR, "content is empty, not encoding");
+ 		return -1;
+ 	}
++	encoded->data = NULL;
+ 	if (SEC_ASN1EncodeItem(cms->arena, encoded, original,
+ 			SEC_OctetStringTemplate) == NULL)
+ 		cmsreterr(-1, cms, "could not encode octet string");
+@@ -773,6 +776,7 @@
+ 		cmsreterr(-1, cms, "could not find OID");
+ 
+ 	void *ret;
++	der->data = NULL;
+ 	ret = SEC_ASN1EncodeItem(cms->arena, der, &oid->oid,
+ 						SEC_ObjectIDTemplate);
+ 	if (ret == NULL)
+@@ -797,6 +801,7 @@
+ 	if (SECITEM_CopyItem(cms->arena, &id.algorithm, &oiddata->oid))
+ 		return -1;
+ 
++	id.parameters.data = NULL;
+ 	SECITEM_AllocItem(cms->arena, &id.parameters, 2);
+ 	if (id.parameters.data == NULL)
+ 		goto err;
+diff -ru pesign-0.112-orig/src/content_info.c pesign-0.112/src/content_info.c
+--- pesign-0.112-orig/src/content_info.c	2017-06-13 23:24:43.030253930 +0000
++++ pesign-0.112/src/content_info.c	2017-06-13 23:28:11.819923372 +0000
+@@ -76,6 +76,8 @@
+ {
+ 	SpcPeImageData spid;
+ 
++	spid.flags.data = NULL;
++
+ 	SECITEM_AllocItem(cms->arena, &spid.flags, 1);
+ 	if (!spid.flags.data)
+ 		return -1;
+
