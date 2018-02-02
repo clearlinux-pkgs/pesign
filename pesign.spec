@@ -4,7 +4,7 @@
 #
 Name     : pesign
 Version  : 0.112
-Release  : 5
+Release  : 6
 URL      : https://github.com/rhboot/pesign/releases/download/0.112/pesign-0.112.tar.bz2
 Source0  : https://github.com/rhboot/pesign/releases/download/0.112/pesign-0.112.tar.bz2
 Summary  : No detailed summary available
