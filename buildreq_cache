@@ -1,0 +1,7 @@
+0.112
+pkgconfig(efivar)
+pkgconfig(nss)
+pkgconfig(popt)
+pkgconfig(uuid)
+popt-dev
+util-linux-dev
