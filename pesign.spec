@@ -4,7 +4,7 @@
 #
 Name     : pesign
 Version  : 113
-Release  : 11
+Release  : 12
 URL      : https://github.com/rhboot/pesign/releases/download/113/pesign-113.tar.bz2
 Source0  : https://github.com/rhboot/pesign/releases/download/113/pesign-113.tar.bz2
 Summary  : No detailed summary available
@@ -80,20 +80,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1589854272
+export SOURCE_DATE_EPOCH=1664917554
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1589854272
+export SOURCE_DATE_EPOCH=1664917554
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pesign
-cp %{_builddir}/pesign-113/COPYING %{buildroot}/usr/share/package-licenses/pesign/842745cb706f8f2126506f544492f7a80dbe29b3
+cp %{_builddir}/pesign-%{version}/COPYING %{buildroot}/usr/share/package-licenses/pesign/842745cb706f8f2126506f544492f7a80dbe29b3 || :
 %make_install
 
 %files
