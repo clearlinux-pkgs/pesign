@@ -1,6 +1,6 @@
-113
+116
 pkgconfig(efivar)
 pkgconfig(nss)
-pkgconfig(popt)
 pkgconfig(uuid)
 popt-dev
+util-linux-dev

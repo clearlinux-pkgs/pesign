@@ -1,1 +1,3 @@
+0001-remove-root-check.patch
 clear-crash-patch.patch
+backport-fix-segfault.patch

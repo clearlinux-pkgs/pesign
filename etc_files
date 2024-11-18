@@ -1,0 +1,17 @@
+/etc/:
+/etc/pesign:
+/etc/pki/pesign-rh-test:
+/etc/pki/pesign:
+/etc/pki:
+/etc/popt.d:
+/etc/rpm:
+groups
+macros.pesign
+pesign
+pesign
+pesign-rh-test
+pesign.popt
+pki
+popt.d
+rpm
+users
